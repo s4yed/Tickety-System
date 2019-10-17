@@ -1,59 +1,61 @@
-const express = require('express');
+const express = require("express");
+const bodyParser = require("body-parser");
 const router = express.Router();
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const { check, validationResult } = require('express-validator');
+const passport = require("passport");
 
+const cors = require("../cors");
+const auth = require("../../authenticate");
 
-//const { check, validationResult } = require("express-validator");
-const User = require('../../models/User');
+const User = require("../../models/user");
+router.use(bodyParser.json());
 
-router.post('/', [
-    check('name', 'Name is required').not().isEmpty(),
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please Enter a password with 6  or more characters').isLength({ min: 6 })
-],
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() })
-        }
-
-        const { name, email, password } = req.body;
-
-        try {
-
-            let user = await User.findOne({ email });
-
-            if (user) {
-                res.status(400).json({ errors: [{ msg: 'User already exists' }] });
-            } else {
-                User.create(req.body).then(user => {
-                    const avatar = gravatar.url(email, {
-                        s: '200',
-                        r: 'pg',
-                        d: 'mm'
-                    });    
-                    // const salt = bcrypt.getSalt(10);
-                    // user.password = bcrypt.hash(password, salt);
-        
-                    user.save().then(user => {
-
-                        res.json(user);
+router
+    .route("/signup")
+    .options(cors.corsWithOptions, (req, res) => {
+        res.sendStatus(200);
+    })
+    .post(cors.corsWithOptions, (req, res, next) => {
+        User.register(
+            new User({ username: req.body.username, email: req.body.email }),
+            req.body.password,
+            (err, user) => {
+                if (err) return res.status(403).json({ success: false, error: err });
+                if (req.body.email) user.email = req.body.email;
+                if (req.body.username) user.username = req.body.username;
+                console.log(user);
+                user.save((err, user) => {
+                    if (err) return res.status(500).json({ success: false, error: err });
+                    console.log(user);
+                    passport.authenticate("local")(req, res, () => {
+                        res
+                            .status(200)
+                            .json({ success: true, status: "Registration Successful!" });
                     });
-        
-            
-                    
-                })
-                
-                
+                });
             }
-
-            
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server error')
-        }
+        );
     });
+
+router
+    .route("/login")
+    .options(cors.corsWithOptions, (req, res) => {
+        res.sendStatus(200);
+    })
+    .post(cors.corsWithOptions, passport.authenticate("local"),(req, res, next) => {
+        const token = auth.getToken({ _id: req.user._id });
+        res.status(200).json({ success: true, token, status: "Successful Login!"});
+    });
+
+router.route("/logout")
+.get(cors.cors , (req, res, next) => {
+    console.log(req);
+    if(req.session) {
+        req.session.destroy();
+        res.clearCookie();
+        res.redirect("/");
+    } else {
+        res.status(403).json({error: new Error("You are not logged in!")});
+    }
+})
 
 module.exports = router;
