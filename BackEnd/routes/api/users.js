@@ -38,23 +38,24 @@ router
 
 router
     .route("/login")
-    .options(cors.corsWithOptions, (req, res) => {
-        res.sendStatus(200);
-    })
-    .post(cors.corsWithOptions, passport.authenticate("local"),(req, res, next) => {
-        const token = auth.getToken({ _id: req.user._id });
+    // .options(cors.corsWithOptions, (req, res) => {
+    //     res.sendStatus(200);
+    // })
+    .post(passport.authenticate("local"),(req, res, next) => {
+        const token = auth.getToken({ _id: req.user._id, username: req.user.username, email: req.user.email });
         res.status(200).json({ success: true, token, status: "Successful Login!"});
     });
 
 router.route("/logout")
 .get(cors.cors , (req, res, next) => {
-    console.log(req);
+    
     if(req.session) {
         req.session.destroy();
         res.clearCookie();
         res.redirect("/");
+        res.status(200).json({msg: "You are logged out!"})
     } else {
-        res.status(403).json({error: new Error("You are not logged in!")});
+        res.status(200).json({msg: "You are not logged in!"});
     }
 })
 
