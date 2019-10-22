@@ -38,25 +38,54 @@ router
 
 router
     .route("/login")
-    // .options(cors.corsWithOptions, (req, res) => {
-    //     res.sendStatus(200);
-    // })
-    .post(passport.authenticate("local"),(req, res, next) => {
-        const token = auth.getToken({ _id: req.user._id, username: req.user.username, email: req.user.email });
-        res.status(200).json({ success: true, token, status: "Successful Login!"});
+    .options(cors.corsWithOptions, (req, res) => {
+        res.sendStatus(200);
+    })
+    .post(cors.corsWithOptions, passport.authenticate("local"), (req, res, next) => {
+        const token = auth.getToken({
+            _id: req.user._id,
+            username: req.user.username,
+            email: req.user.email,
+            fullName: req.user.fullName,
+            university: req.user.university,
+            faculty: req.user.faculty,
+            facebook: req.user.facebook,
+            major: req.user.major,
+            phone: req.user.phone
+        });
+        res.status(200).json({ success: true, token, status: "Successful Login!" });
+    });
+
+router.route("/update")
+    .options(cors.corsWithOptions, (req, res) => {
+        res.sendStatus(200);
+    })
+    .post(cors.corsWithOptions, auth.verifyUser, (req, res, next) => {
+        const token = auth.getToken({
+            _id: req.user._id,
+            username: req.user.username,
+            email: req.user.email,
+            fullName: req.user.fullName,
+            university: req.user.university,
+            faculty: req.user.faculty,
+            facebook: req.user.facebook,
+            major: req.user.major,
+            phone: req.user.phone
+        });
+        res.status(200).json({ success: true, token, status: "Token Updated!" });
     });
 
 router.route("/logout")
-.get(cors.cors , (req, res, next) => {
-    
-    if(req.session) {
-        req.session.destroy();
-        res.clearCookie();
-        res.redirect("/");
-        res.status(200).json({msg: "You are logged out!"})
-    } else {
-        res.status(200).json({msg: "You are not logged in!"});
-    }
-})
+    .get(cors.cors, (req, res, next) => {
+
+        if (req.session) {
+            req.session.destroy();
+            res.clearCookie();
+            res.redirect("/");
+            res.status(200).json({ msg: "You are logged out!" })
+        } else {
+            res.status(200).json({ msg: "You are not logged in!" });
+        }
+    })
 
 module.exports = router;

@@ -36,7 +36,12 @@ const User = new Schema({
     avatar: {
         type: String,
         default: ''
-    }
+    },
+    facebook: {
+        type: String,
+        default: ""
+    },
+    
 }, {
     timestamps: true
 });
