@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const authenticate = require('../../authenticate');
-
+const cors = require('../cors')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/images');
@@ -26,26 +26,16 @@ const uploadRouter = express.Router();
 uploadRouter.use(bodyParser.json());
 
 uploadRouter.route('/')
-    .get(
+    .options(cors.corsWithOptions, (req, res) => {
+        res.sendStatus(200);
+    })
+    .get(cors.cors, authenticate.verifyUser,
         (req, res, next) => {
             res.statusCode = 403;
             res.end('Get operation not supported on /imageUpload');
         })
-    .post(
-        upload.single('imageFile'), (req, res) => {
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json(req.file);
+    .post(cors.corsWithOptions, authenticate.verifyUser,
+        upload.single('imageFile'), (req, res, next) => {
+            res.status(200).json({success: true, data: req.file})
         })
-    .put(
-        (req, res, next) => {
-            res.statusCode = 403;
-            res.end('put operation not supported on /imageUpload');
-        })
-    .delete( 
-        (req, res, next) => {
-            res.statusCode = 403;
-            res.end('Delete operation not supported on /imageUpload');
-        })
-
 module.exports = uploadRouter;
