@@ -2,7 +2,51 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require("passport-local-mongoose");
 const Schema = mongoose.Schema;
 
-const User = new Schema({
+const PhotoSchema = new Schema({
+    destination: {
+        type: String,
+        required: true,
+        default: ""
+    },
+    encoding: {
+        type: String,
+        required: true,
+        default: ""
+    },
+    fieldname: {
+        type: String,
+        required: true,
+        default: ""
+    },
+    filename:{
+        type: String,
+        required: true,
+        default: ""
+    },
+    mimetype: {
+        type: String,
+        required: true,
+        default: ""
+    },
+    originalname: {
+        type: String,
+        required: true,
+        default: ""
+    },
+    path: {
+        type: String,
+        required: true,
+        default: ""
+    },
+    size: {
+        type: Number,
+        required: true,
+        default: 0
+    }
+},{
+    timestamps: true
+});
+const UserSchema = new Schema({
     fullName: {
         type: String,
         default: ""
@@ -33,10 +77,7 @@ const User = new Schema({
         required: true,
         unique: true
     },
-    avatar: {
-        type: String,
-        default: ''
-    },
+    photo: [PhotoSchema],
     facebook: {
         type: String,
         default: ""
@@ -46,5 +87,5 @@ const User = new Schema({
     timestamps: true
 });
 
-User.plugin(passportLocalMongoose);
-module.exports = mongoose.model('User', User);
+UserSchema.plugin(passportLocalMongoose);
+module.exports = mongoose.model('User', UserSchema);

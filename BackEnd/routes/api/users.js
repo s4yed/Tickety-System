@@ -70,7 +70,8 @@ router.route("/update")
             faculty: req.user.faculty,
             facebook: req.user.facebook,
             major: req.user.major,
-            phone: req.user.phone
+            phone: req.user.phone,
+            photo: req.user.photo[0].path
         });
         res.status(200).json({ success: true, token, status: "Token Updated!" });
     });

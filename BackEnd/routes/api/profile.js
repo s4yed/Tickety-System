@@ -26,20 +26,22 @@ router
                     .then(
                         vals => {
                             console.log(vals);
-                            res
-                                .status(202)
-                                .json({
-                                    success: true,
-                                    msg: "User profile updated successfully!"
-                                });
+                            return res.status(202).json({
+                                success: true,
+                                msg: "User profile updated successfully!"
+                            });
                             next();
                         },
                         err => {
-                            res.status(500).json({ success: false, msg: "Server error!" });
+                            return res
+                                .status(500)
+                                .json({ success: false, msg: "Server error!" });
                         }
                     )
                     .catch(err => {
-                        res.status(500).json({ success: false, msg: "Server error!" });
+                        return res
+                            .status(500)
+                            .json({ success: false, msg: "Server error!" });
                     });
             }
         });
