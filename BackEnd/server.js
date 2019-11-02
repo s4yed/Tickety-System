@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require("passport");
 const connectDB = require('./config/db');
 const logger = require("morgan");
-const uploadRouter = require('./routes/api/uploadRouter');
+const upload = require('./routes/api/uploadPhoto');
 const app = express();
 
 
@@ -22,7 +22,7 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
-app.use('/api/imageUpload', uploadRouter);
+app.use('/api/imageUpload', upload);
 
 const PORT = process.env.PORT || 5000;
 

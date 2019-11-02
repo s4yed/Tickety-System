@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("../cors");
-const User = require("../../models/user");
+const User = require("../../models/index").user;
 const auth = require("../../authenticate");
 
 router
@@ -28,20 +28,20 @@ router
                             console.log(vals);
                             return res.status(202).json({
                                 success: true,
-                                msg: "User profile updated successfully!"
+                                msg: "Your profile updated successfully!"
                             });
                             next();
                         },
                         err => {
                             return res
                                 .status(500)
-                                .json({ success: false, msg: "Server error!" });
+                                .json({ success: false, error: err });
                         }
                     )
                     .catch(err => {
                         return res
                             .status(500)
-                            .json({ success: false, msg: "Server error!" });
+                            .json({ success: false, error: err });
                     });
             }
         });

@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const authenticate = require("../../authenticate");
-const User = require("../../models/user");
+const User = require("../../models/index").user;
 
 const cors = require("../cors");
 
@@ -45,8 +45,8 @@ uploadRouter
             User.findById({ _id: req.user._id }, (err, user) => {
                 if (err)
                     return res
-                        .status(404)
-                        .json({ success: false, msg: "User not found!" });
+                        .status(500)
+                        .json({ success: false, error: err });
                 if (user) {
                     if (req.file) {
                         user.photo[0] = req.file;
@@ -58,11 +58,11 @@ uploadRouter
                                     return next();
                                 },
                                 err => {
-                                    return res.status(500).json({ success: false, msg: "Server error!" });
+                                    return res.status(500).json({ success: false, error: err });
                                 }
                             )
                             .catch(err => {
-                                return res.status(500).json({ success: false, msg: "Server error!" });
+                                return res.status(500).json({ success: false, error: err });
                             });
                     }
                     else return res.status(400).json({ success: false, msg: "No file uploaded!" });

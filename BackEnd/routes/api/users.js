@@ -6,9 +6,8 @@ const passport = require("passport");
 const cors = require("../cors");
 const auth = require("../../authenticate");
 
-const User = require("../../models/user");
+const User = require("../../models/index").user;
 router.use(bodyParser.json());
-
 router
     .route("/signup")
     .options(cors.corsWithOptions, (req, res) => {
@@ -19,7 +18,7 @@ router
             new User({ username: req.body.username, email: req.body.email }),
             req.body.password,
             (err, user) => {
-                if (err) return res.status(403).json({ success: false, error: err });
+                if (err) return res.status(500).json({ success: false, error: err });
                 if (req.body.email) user.email = req.body.email;
                 if (req.body.username) user.username = req.body.username;
                 console.log(user);
@@ -28,8 +27,8 @@ router
                     console.log(user);
                     passport.authenticate("local")(req, res, () => {
                         res
-                            .status(200)
-                            .json({ success: true, status: "Registration Successful!" });
+                            .status(201)
+                            .json({ success: true, msg: "Registration Successful!" });
                     });
                 });
             }
@@ -53,7 +52,7 @@ router
             major: req.user.major,
             phone: req.user.phone
         });
-        res.status(200).json({ success: true, token, status: "Successful Login!" });
+        res.status(200).json({ success: true, token, msg: "Successful Login!" });
     });
 
 router.route("/update")
@@ -73,7 +72,7 @@ router.route("/update")
             phone: req.user.phone,
             photo: req.user.photo[0].path
         });
-        res.status(200).json({ success: true, token, status: "Token Updated!" });
+        res.status(200).json({ success: true, token, msg: "Token Updated!" });
     });
 
 router.route("/logout")
