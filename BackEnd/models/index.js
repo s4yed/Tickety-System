@@ -1,13 +1,15 @@
-const user = require('./user');
-const bus = require('./tickets/bus');
-const train = require('./tickets/train');
-const cenima = require('./tickets/cinema');
-const flight = require('./tickets/flight');
+const user = require('./User');
+const bus = require('./tickets/Bus');
+const train = require('./tickets/Train');
+const cinema = require('./tickets/Cinema');
+const match = require('./tickets/Match');
+const ticket = require('./tickets/Ticket');
 
 module.exports = {
     user,
     bus,
-    cenima,
+    cinema,
     train,
-    flight
+    match,
+    ticket
 };

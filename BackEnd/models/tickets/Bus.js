@@ -20,6 +20,10 @@ const BusSchema = new Schema({
         type: String,
         required: true
     },
+    date_time: {
+        type: Date,
+        required: true
+    },
     price: {
         type: Currency,
         require: true,
@@ -33,8 +37,6 @@ const BusSchema = new Schema({
         type: Number,
         required: true
     }
-}, {
-    timestamps: true
 });
 
 module.exports = mongoose.model("Bus", BusSchema);

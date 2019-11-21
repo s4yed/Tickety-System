@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
-
+const PhotoSchema = require('../Photo');
 const CinemaSchema = new Schema({
     seat: {
         type: Number,
         required: true
     },
-    name: {
+    cinema_name: {
         type: String,
         required: true
     },
@@ -18,6 +18,10 @@ const CinemaSchema = new Schema({
     },
     address: {
         type: String,
+        required: true
+    },
+    date_time: {
+        type: Date,
         required: true
     },
     price: {
@@ -32,9 +36,8 @@ const CinemaSchema = new Schema({
     ticket_no: {
         type: Number,
         required: true
-    }
-}, {
-    timestamps: true
+    },
+    photo: [PhotoSchema]
 });
 
 module.exports = mongoose.model("Cinema", CinemaSchema);

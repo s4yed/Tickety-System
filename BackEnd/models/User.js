@@ -1,51 +1,10 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require("passport-local-mongoose");
 const Schema = mongoose.Schema;
+const TicketSchema = require("./tickets/Ticket").schema;
+const PhotoSchema = require("./Photo");
 
-const PhotoSchema = new Schema({
-    destination: {
-        type: String,
-        required: true,
-        default: ""
-    },
-    encoding: {
-        type: String,
-        required: true,
-        default: ""
-    },
-    fieldname: {
-        type: String,
-        required: true,
-        default: ""
-    },
-    filename:{
-        type: String,
-        required: true,
-        default: ""
-    },
-    mimetype: {
-        type: String,
-        required: true,
-        default: ""
-    },
-    originalname: {
-        type: String,
-        required: true,
-        default: ""
-    },
-    path: {
-        type: String,
-        required: true,
-        default: ""
-    },
-    size: {
-        type: Number,
-        required: true,
-        default: 0
-    }
-},{
-    timestamps: true
-});
+
 const UserSchema = new Schema({
     fullName: {
         type: String,
@@ -82,6 +41,7 @@ const UserSchema = new Schema({
         type: String,
         default: ""
     },
+    tickets: [TicketSchema]
     
 }, {
     timestamps: true

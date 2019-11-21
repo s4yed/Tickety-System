@@ -3,26 +3,30 @@ const Schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
-const FlightSchema = new Schema({
+const MatchSchema = new Schema({
     seat: {
         type: Number,
         required: true
     },
-    plane_no: {
-        type: Number,
-        required: true
-    },
-    from: {
+    stadium: {
         type: String,
         required: true
     },
-    to: {
+    home_team: {
+        type: String,
+        required: true
+    },
+    away_team: {
+        type: String,
+        required: true
+    },
+    date_time: {
         type: String,
         required: true
     },
     price: {
         type: Currency,
-        require: true,
+        required: true,
         min: 0
     },
     ticket_type: {
@@ -33,8 +37,6 @@ const FlightSchema = new Schema({
         type: Number,
         required: true
     }
-}, {
-    timestamps: true
 });
 
-module.exports = mongoose.model("Flight", FlightSchema);
+module.exports = mongoose.model("Match", MatchSchema);
