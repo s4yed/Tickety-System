@@ -6,16 +6,17 @@ const from_to = ["Alexandria","Cairo","Luxur","Aswan","Tanta","Hurghada", "Assui
 
 const clubs = ["Barcelona", "Porto","Bayern Munich","Manchester United","Juventus","Benfica","Real Madrid"]
 const stads = ["Camp Nou","Signal Iduna Park","San Siro","Stade de France","Mestalla"]
-const type1 = ["VIP","Normal"]
+const type1 = ["VIP", "Normal", "Economy"]
 
 let buses = [];
 let trains = [];
 for(let i = 0; i < 15; ++i) {
     const train = {
         seat: parseInt(Math.random()*1000),
-        stadium: stads[parseInt(Math.random()*stads.length)],
-        home_team: clubs[parseInt(Math.random()*clubs.length)],
-        away_team: clubs[parseInt(Math.random()*clubs.length)],
+        from: from_to[parseInt(Math.random()*from_to.length)],
+        to: from_to[parseInt(Math.random()*from_to.length)],
+        train_no: parseInt(1 + Math.random()*1000),
+        category: "TRAIN",
         date_time: new Date().toGMTString(),
         price: parseInt(30 + Math.random()*200),
         ticket_type: type1[parseInt(Math.random()*2)],

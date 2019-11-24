@@ -2,10 +2,6 @@ const express = require("express");
 const router = express.Router();
 const cors = require("../cors");
 const Ticket = require("../../models/index").ticket;
-const Bus = require("../../models/index").bus;
-const Train = require("../../models/index").train;
-const Cinema = require("../../models/index").cinema;
-const Match = require("../../models/index").match;
 const User = require("../../models/index").user;
 
 router.route("/")
@@ -13,23 +9,11 @@ router.route("/")
         res.sendStatus(200);
     })
     .get(cors.cors, (req, res, next) => {
-        Ticket.findOneAndUpdate({}).then(all => {
-            Match.find({}).then(matches => {
-                Cinema.find({}).then(cinemas => {
-                    Train.find({}).then(trains => {
-                        Bus.find({}).then(buses => {
-                            all.buses = buses;
-                            all.trains = trains;
-                            all.matches = matches;
-                            all.cinemas = cinemas;
-                            all.save(vals => {
-                                res.status(200).json({success: true, tickets: all.toJSON()});
-                            })
-                        }, err => { return res.status(500).json({ success: false, error: err }); });
-                    }, err => { return res.status(500).json({ success: false, error: err }); });
-                }, err => { return res.status(500).json({ success: false, error: err }); });
-            }, err => { return res.status(500).json({ success: false, error: err }); });
-        }, err => { return res.status(500).json({ success: false, error: err }); })
+        Ticket.find({}).then(tickets => {
+            if(req.query)
+                tickets = tickets.slice(0,req.query.limit);
+            return res.status(200).contentType("json").json({success: true, tickets});
+        })           
         .catch(err => { return res.status(500).json({ success: false, error: err }); });
         
     });
@@ -40,13 +24,13 @@ router.route("/buses")
     })
     .get(cors.cors, (req, res, next) => {
         Ticket.findOne({}).then(tickets => {
-            res.status(200).json({success: true, buses: tickets.buses});
+            return es.status(200).json({success: true, buses: tickets.buses});
         }, err => { return res.status(500).json({ success: false, error: err }); })
         .catch(err => { return res.status(500).json({ success: false, error: err }); });
     })
     .post((req, res, next) => {
         Bus.create(req.body).then(bus => {
-            res.status(200).json({success:true, bus});
+            return res.status(200).json({success:true, bus});
         },err => {return res.status(500).json({success: false, error: err});})
         .catch(err => {return res.status(500).json({success: false, error: err});});
     })
@@ -57,13 +41,13 @@ router.route("/trains")
     })
     .get(cors.cors, (req, res, next) => {
         Ticket.findOne({}).then(tickets => {
-            res.status(200).json({success: true, trains: tickets.trains});
+            return res.status(200).json({success: true, trains: tickets.trains});
         }, err => { return res.status(500).json({ success: false, error: err }); })
         .catch(err => { return res.status(500).json({ success: false, error: err }); });
     })
     .post((req, res, next) => {
         Train.create(req.body).then(train => {
-            res.status(200).json({success:true, train});
+            return res.status(200).json({success:true, train});
         },err => {return res.status(500).json({success: false, error: err});})
         .catch(err => {return res.status(500).json({success: false, error: err});});
     })
@@ -74,10 +58,11 @@ router.route("/cinemas")
     })
     .get(cors.cors, (req, res, next) => {
         Ticket.findOne({}).then(tickets => {
-            res.status(200).json({success: true, cinemas: tickets.cinemas});
+            return res.status(200).json({success: true, cinemas: tickets.cinemas});
         }, err => { return res.status(500).json({ success: false, error: err }); })
         .catch(err => { return res.status(500).json({ success: false, error: err }); });
     });
+    
 
 router.route("/matches")
     .options(cors.corsWithOptions, (req, res) => {
@@ -85,15 +70,26 @@ router.route("/matches")
     })
     .get(cors.cors, (req, res, next) => {
         Ticket.findOne({}).then(tickets => {
-            res.status(200).json({success: true, matches: tickets.matches});
+            return res.status(200).json({success: true, matches: tickets.matches});
         }, err => { return res.status(500).json({ success: false, error: err }); })
         .catch(err => { return res.status(500).json({ success: false, error: err }); });
     })
     .post((req, res, next) => {
-        Match.create(req.body).then(match => {
-            res.status(200).json({success:true, match});
+        Ticket.create(req.body).then(match => {
+            return res.status(200).json({success:true, match});
         },err => {return res.status(500).json({success: false, error: err});})
         .catch(err => {return res.status(500).json({success: false, error: err});});
+    });
+
+router.route("/matches/:id")
+    .options(cors.corsWithOptions, (req, res) => {
+        res.sendStatus(200);
+    })
+    .get(cors.cors, (req, res, next) => {
+        Ticket.findById({_id:req.params.id}).then(match => {
+            return res.status(200).json({success: true, match});
+        }, err => { return res.status(500).json({ success: false, error: err }); })
+        .catch(err => { return res.status(500).json({ success: false, error: err }); });
     })
 
 module.exports = router; 

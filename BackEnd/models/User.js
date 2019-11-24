@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require("passport-local-mongoose");
 const Schema = mongoose.Schema;
-const TicketSchema = require("./tickets/Ticket").schema;
 const PhotoSchema = require("./Photo");
 
 
@@ -41,7 +40,10 @@ const UserSchema = new Schema({
         type: String,
         default: ""
     },
-    tickets: [TicketSchema]
+    admin: {
+        type: Boolean,
+        default: false
+    }
     
 }, {
     timestamps: true
