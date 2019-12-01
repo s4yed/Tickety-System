@@ -1,0 +1,30 @@
+@host = http://localhost:5000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVkYmExYjE2ZWM1YmNkNGY4Y2UwMmZhMSIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmFkIiwiZnVsbE5hbWUiOiJBZG1pbiIsInVuaXZlcnNpdHkiOiJhZG1vbmEiLCJmYWN1bHR5IjoiYWRtb24iLCJmYWNlYm9vayI6ImFkbWluYWRtaW4iLCJtYWpvciI6IkNTIiwicGhvbmUiOiIwMTIzNDU2Nzg5IiwicGhvdG8iOiJwdWJsaWNcXGltYWdlc1xcNWRiYTFiMTZlYzViY2Q0ZjhjZTAyZmExLmpwZyJ9LCJpYXQiOjE1NzQ5NzA0MzgsImV4cCI6MTU3NTMzMDQzOH0.0q0yjvtpX2NlU6_k_43JSIhIHPK0A4arekzWwf6Z_Pw
+
+GET {{host}}/api/users/user_data
+Authorization: Bearer {{token}}
+
+###
+
+GET {{host}}/api/tickets?page=1&limit=8
+
+###
+
+POST {{host}}/api/auth/signup
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "email": "a",
+    "password": "1236"
+}
+
+###
+
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "123456"
+}
