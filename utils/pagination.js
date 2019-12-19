@@ -1,5 +1,6 @@
 const paginatedResults = Model => {
     return async (req, res, next) => {
+        if (!req.query.page || !req.query.limit) return;
         // Get page and limit query from the request
         const page = parseInt(req.query.page);
         const limit = parseInt(req.query.limit);

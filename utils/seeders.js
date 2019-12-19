@@ -50,7 +50,6 @@ for (let i = 0; i < 15; ++i) {
     };
     trains.push(train);
 }
-
 for (let i = 0; i < 15; ++i) {
     const bus = {
         seats: parseInt(50 + Math.random() * 1000),

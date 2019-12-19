@@ -5,15 +5,22 @@ const { matches, buses, trains } = require('../utils/seeders');
 
 const connectDB = async () => {
     mongoose
-        .connect(process.env.MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-        })
+        .connect(
+            process.env.MONGO_URL || 'mongodb://localhost:27017/dbServer',
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useCreateIndex: true,
+            }
+        )
         .then(() => console.log('MongoDB Connected....'));
 
     db.once('open', async () => {
-        if ((await User.countDocuments().exec()) > 0) return;
+        if (
+            (await User.countDocuments().exec()) > 0 &&
+            (await User.countDocuments().exec()) > 0
+        )
+            return;
         const password = '123456';
         Promise.all([
             User.register(
@@ -30,22 +37,22 @@ const connectDB = async () => {
             ),
         ]).then(() => console.log('Added users!'));
 
-        // let all_matches = matches.map(match => {
-        //     return Ticket.create(match);
-        // });
-        // Promise.all(all_matches).then(() =>
-        //     console.log('Added match tickets!')
-        // );
+        let all_matches = matches.map(match => {
+            return Ticket.create(match);
+        });
+        Promise.all(all_matches).then(() =>
+            console.log('Added match tickets!')
+        );
 
-        // let all_buses = buses.map(bus => {
-        //     return Ticket.create(bus);
-        // });
-        // Promise.all(all_buses).then(() => console.log('Added bus tickets!'));
+        let all_buses = buses.map(bus => {
+            return Ticket.create(bus);
+        });
+        Promise.all(all_buses).then(() => console.log('Added bus tickets!'));
 
-        // let all_trains = trains.map(train => {
-        //     return Ticket.create(train);
-        // });
-        // Promise.all(all_trains).then(() => console.log('Added train tickets!'));
+        let all_trains = trains.map(train => {
+            return Ticket.create(train);
+        });
+        Promise.all(all_trains).then(() => console.log('Added train tickets!'));
     });
 };
 

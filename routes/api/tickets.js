@@ -26,18 +26,18 @@ router
             });
     });
 
-router.route('/:id').get(verifyUser, (req, res, next) => {
-    Ticket.findById({ _id: req.params.id })
-        .then(ticket => {
-            return res
-                .status(200)
-                .contentType('json')
-                .json({ success: true, tickets });
-        })
-        .catch(err => {
-            return res.status(500).json({ success: false, error: err });
-        });
-});
+// router.route('/:id').get(verifyUser, (req, res, next) => {
+//     Ticket.findById({ _id: req.params.id })
+//         .then(ticket => {
+//             return res
+//                 .status(200)
+//                 .contentType('json')
+//                 .json({ success: true, ticket });
+//         })
+//         .catch(err => {
+//             return res.status(500).json({ success: false, error: err });
+//         });
+// });
 
 router.route('/buses').get((req, res, next) => {
     Ticket.find({ category: 'BUS' })
@@ -49,7 +49,7 @@ router.route('/buses').get((req, res, next) => {
         });
 });
 
-router.route('/buses/:id').get(verifyUser,(req, res, next) => {
+router.route('/buses/:id').get(verifyUser, (req, res, next) => {
     Ticket.findById({ _id: req.params.id })
         .then(bus => {
             return res.status(200).json({ success: true, bus });
@@ -69,7 +69,7 @@ router.route('/trains').get((req, res, next) => {
         });
 });
 
-router.route('/trains/:id').get(verifyUser,(req, res, next) => {
+router.route('/trains/:id').get(verifyUser, (req, res, next) => {
     Ticket.findById({ _id: req.params.id })
         .then(train => {
             return res.status(200).json({ success: true, train });
@@ -89,7 +89,7 @@ router.route('/cinemas').get((req, res, next) => {
         });
 });
 
-router.route('/cinemas/:id').get(verifyUser,(req, res, next) => {
+router.route('/cinemas/:id').get(verifyUser, (req, res, next) => {
     Ticket.findById({ _id: req.params.id })
         .then(cinema => {
             return res.status(200).json({ success: true, cinema });
@@ -109,7 +109,7 @@ router.route('/matches').get((req, res, next) => {
         });
 });
 
-router.route('/matches/:id').get(verifyUser,(req, res, next) => {
+router.route('/matches/:id').get(verifyUser, (req, res, next) => {
     Ticket.findById({ _id: req.params.id })
         .then(match => {
             return res.status(200).json({ success: true, match });

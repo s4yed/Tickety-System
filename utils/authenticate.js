@@ -13,7 +13,7 @@ passport.deserializeUser(User.deserializeUser());
 // Sign JWT token valid for just 50 minutes
 const getToken = user => {
     return jwt.sign({ user }, '0132-4567-8901-2345-6789', {
-        expiresIn: '50m',
+        // expiresIn: '50m',
     });
 };
 

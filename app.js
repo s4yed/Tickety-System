@@ -19,7 +19,7 @@ const ticketsRouter = require('./routes/api/tickets');
 const app = express();
 
 // Configure .env file to load stored variables
-dotenv.config();
+// dotenv.config();
 
 // Connect to our mongoDB
 connectDB();
