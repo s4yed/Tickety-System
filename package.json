@@ -31,6 +31,9 @@
     "pug": "^2.0.4",
     "request": "^2.88.0"
   },
+  "engines": {
+    "node": "v12.11.1"
+  },
   "devDependencies": {
     "concurrently": "^5.0.0",
     "nodemon": "^1.19.3"
