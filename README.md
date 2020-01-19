@@ -26,7 +26,9 @@ An online ticket booking system that helps customers to book their tickets onlin
 
 ## Getting Started
 
-First thing you need to install **Nodejs**, clone the repo then run `npm install` in your terminal and finally `npm start`.
+1. First thing you need to install **Nodejs** and clone the repo.
+2. Run npm install in the terminal then `npm start`.
+3. Switch to the branch **backend** and run`npm install` in your terminal, finally `npm start`.
 
 ## Liberaries
 
