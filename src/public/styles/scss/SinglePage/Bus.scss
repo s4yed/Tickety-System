@@ -1,0 +1,95 @@
+.booking {
+    background: #f9f9f9;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 3em auto;
+    border: 1px solid #5e9aab;
+    padding: 1em 2em;
+    // width: 100%;
+    &__head {
+        display: flow-root;
+        font-size: 22px;
+        font-weight: 500;
+        text-align: center;
+        color: #3b8696;
+        padding-bottom: 2em;
+        i {
+            margin-right: 0.5em;
+        }
+    }
+    label {
+        float: left;
+        margin-left: 1em;
+        color: #3b8696;
+        font-size: 20px;
+    }
+    select {
+        padding: 1em;
+    }
+    .form-control {
+        &:focus {
+            border: 1px solid #5e9aab !important;
+            box-shadow: none !important;
+        }
+    }
+    input {
+        margin: 0 0 0 1em;
+        height: 65px !important;
+        padding: 0px 1em;
+        font-size: 20px;
+        font-family: 'Open Sans', sans-serif;
+        background-color: #fff !important;
+        border: 1px solid #dadada !important;
+        border-radius: 50px;
+        transition: all 250ms ease-in-out;
+        color: #3d3d3d;
+
+        &:focus {
+            outline: none;
+            box-shadow: none !important;
+            border: 1px solid #5e9aab !important;
+        }
+
+        &:disabled {
+            color: #a39b9b !important;
+        }
+    }
+    .row {
+        margin: 0 2em 2.5em 2em;
+    }
+    .sp {
+        font-size: 15px;
+    }
+    p {
+        font-size: 12px;
+    }
+    h4 {
+        display: inline;
+        padding: 0 1em;
+    }
+    .submit1 {
+        width: 9em;
+        height: 40px;
+        border: 0;
+        background-color: #5e9aab;
+        color: #fff;
+        padding: 0;
+        margin-bottom: 1em;
+        border-radius: 50px;
+        transition: 150ms;
+        cursor: pointer;
+        font-size: 15px;
+    }
+    .ta {
+        border-right: 1px solid #5e9aab;
+        border-left: 1px solid #5e9aab;
+        .ta {
+            .row {
+                width: 100%;
+            }
+        }
+    }
+    .v {
+        width: 100%;
+    }
+}

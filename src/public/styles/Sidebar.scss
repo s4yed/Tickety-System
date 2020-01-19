@@ -1,0 +1,79 @@
+/* Profile sidebar */
+.profile {
+
+  &__sidebar {
+    padding: 20px 0 10px 0;
+    background:linear-gradient(to bottom,
+            #3b8696,
+            #5e9aab,
+            #78a6b4
+    );
+    border-radius: 10px;
+    width: 17em;
+    margin: auto;
+    // border: 1px solid #3498db;
+  }
+  &__userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 40%;
+    height: 40%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+  }
+  &__usertitle {
+    text-align: center;
+    margin-top: 20px;
+    &__name {
+      color: #f3f3f3;
+      //font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+    &__job {
+      text-transform: uppercase;
+      color: #dfdfdf;
+      //font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+  }
+  &__userbuttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+  &__userbuttons .btn {
+    text-transform: uppercase;
+    //font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    border-radius: 50px;
+    margin-right: 5px;
+  }
+  &__userbuttons .btn:last-child {
+    margin-right: 0px;
+  }
+  .nav-link {
+    color: #f2f2f2 !important;
+    text-align: left;
+    font-weight: 400;
+    padding: 1em 1em 1em 2.5em;
+    letter-spacing: 1px;
+    i {
+      margin-right: 10px;
+    }
+    &:focus {
+      text-decoration: none;
+    }
+    &:active {
+      //background-color: rgba(35, 35, 35, 0.1);
+    }
+  }
+  @media (max-width: 1280px) {
+    &__sidebar {
+      width: 100%;
+    }
+  }
+}
