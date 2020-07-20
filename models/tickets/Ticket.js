@@ -6,7 +6,7 @@ const Currency = mongoose.Types.Currency;
 const TicketSchema = new Schema({
     seats: {
         type: Number,
-        required: true,
+        // required: true,
     },
     category: {
         type: String,

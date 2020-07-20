@@ -8,11 +8,11 @@ const UserSchema = new Schema(
     {
         fullName: {
             type: String,
-            default: null,
+            default: '',
         },
         phone: {
             type: String,
-            default: null,
+            default: '',
         },
         username: {
             type: String,
@@ -27,7 +27,7 @@ const UserSchema = new Schema(
         photo: [PhotoSchema],
         facebook: {
             type: String,
-            default: null,
+            default: '',
         },
         admin: {
             type: Boolean,

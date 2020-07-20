@@ -30,8 +30,10 @@ router.route('/signup').post((req, res, next) => {
                     return res.status(500).json({ success: false, error: err });
                 console.log(user);
                 passport.authenticate('local')(req, res, () => {
+                    const token = auth.getToken({ _id: user._id });
                     res.status(201).json({
                         success: true,
+                        token,
                         msg: 'Registration Successful!',
                     });
                 });
@@ -55,7 +57,7 @@ router.route('/logout').get((req, res, next) => {
         req.session.destroy();
         res.clearCookie();
         res.redirect('/');
-        res.status(200).json({ msg: 'You are logged out!' });
+        return res.status(200).json({ msg: 'You are logged out!' });
     } else {
         res.status(200).json({ msg: 'You are not logged in!' });
     }

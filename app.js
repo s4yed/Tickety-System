@@ -19,7 +19,7 @@ const ticketsRouter = require('./routes/api/tickets');
 const app = express();
 
 // Configure .env file to load stored variables
-// dotenv.config();
+dotenv.config();
 
 // Connect to our mongoDB
 connectDB();
@@ -34,7 +34,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
+app.use(cookieParser());
 
 // Use passport to register or login uer before using the API
 app.use(passport.initialize());
@@ -42,7 +42,7 @@ app.use(passport.initialize());
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
 
-// 
+// Serving static assets
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', usersRouter);

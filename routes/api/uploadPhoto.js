@@ -36,37 +36,20 @@ uploadRouter
         res.end('Get operation not supported on /imageUpload');
     })
     .post(auth.verifyUser, upload.single('file'), (req, res, next) => {
-        User.findById({ _id: req.user._id }, (err, user) => {
-            if (err)
-                return res.status(500).json({ success: false, error: err });
+        try {
+            const user = await User.findById({ _id: req.user._id });
             if (user) {
                 if (req.file) {
                     user.photo[0] = req.file;
-                    user.save()
-                        .then(
-                            data => {
-                                res.status(200).json({
-                                    success: true,
-                                    file: req.file,
-                                });
-                                return next();
-                            },
-                            err => {
-                                return res
-                                    .status(500)
-                                    .json({ success: false, error: err });
-                            }
-                        )
-                        .catch(err => {
-                            return res
-                                .status(500)
-                                .json({ success: false, error: err });
-                        });
-                } else
-                    return res
-                        .status(400)
-                        .json({ success: false, msg: 'No file uploaded!' });
+                    await user.save();
+                    res.status(200).json({
+                        success: true,
+                        file: req.file,
+                    });
+                } else return res.status(400).json({ success: false, msg: 'No file uploaded!' });
             }
-        });
+        } catch (err) {
+            return res.status(500).json({ success: false, error: err });
+        }
     });
 module.exports = uploadRouter;

@@ -6,7 +6,8 @@ const { matches, buses, trains } = require('../utils/seeders');
 const connectDB = async () => {
     mongoose
         .connect(
-            process.env.MONGO_URL || 'mongodb://localhost:27017/dbServer',
+            'mongodb://localhost:27017/dbServer',
+
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
