@@ -35,7 +35,7 @@ uploadRouter
         res.statusCode = 403;
         res.end('Get operation not supported on /imageUpload');
     })
-    .post(auth.verifyUser, upload.single('file'), (req, res, next) => {
+    .post(auth.verifyUser, upload.single('file'), async (req, res, next) => {
         try {
             const user = await User.findById({ _id: req.user._id });
             if (user) {

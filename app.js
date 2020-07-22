@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/users', usersRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/tickets', ticketsRouter);
-app.use('/api/imageUpload', uploadRouter);
+app.use('/api/image_upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

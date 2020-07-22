@@ -1,6 +1,6 @@
 @host = http://localhost:5000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVkYmExYjE2ZWM1YmNkNGY4Y2UwMmZhMSJ9LCJpYXQiOjE1NzUyMTUyOTMsImV4cCI6MTU3NTIxODI5M30.WMhbFhuZViuCBh5R0s_1j1D1y6hcnLBLrfnTV9mTD18
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmMTcwYTRhNjY0N2ZjN2JkMDA2NjhhMyJ9LCJpYXQiOjE1OTUzNDcxNDl9.5QxJTbk9nZYgKOX9UNRmpYt0Hps_xdV4obIx4ujlbp0
 
 GET {{host}}/api/users/user_data
 Authorization: Bearer {{token}}
@@ -15,9 +15,9 @@ POST {{host}}/api/auth/signup
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "email": "a",
-    "password": "1236"
+    "username": "y4mm",
+    "email": "aa@home.com",
+    "password": "123456"
 }
 
 ###
@@ -26,6 +26,11 @@ POST {{host}}/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "admin",
+    "username": "y4mm1",
     "password": "123456"
 }
+
+###
+
+GET {{host}}/api/users/admin
+Authorization: Bearer {{token}}

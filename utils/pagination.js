@@ -40,4 +40,4 @@ const paginatedResults = Model => {
     };
 };
 
-exports.paginatedResults = paginatedResults;
+module.exports = paginatedResults;
