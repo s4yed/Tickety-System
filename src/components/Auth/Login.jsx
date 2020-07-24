@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import loginImg from '../../public/images/login.svg'
 import { Redirect } from "react-router-dom";
 import AuthService from "../../services/auth/authenticate";
-import ValidatinService from '../../services/validation';
+import ValidationService from '../../services/validation';
 
 class Login extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class Login extends Component {
     onLogin = (e) => {
         e.preventDefault();
         const { username, password } = this.state;
-        if (ValidatinService.formValid(this.state)) {
+        if (ValidationService.formValid(this.state)) {
             AuthService.login({ username, password }).then(status => {
                 if (status) {
                     this.setState({

@@ -1,72 +1,40 @@
-import axios from "axios";
 import AuthService from "./auth/authenticate";
 import ConstService from "./constants";
-const { API, Headers } = ConstService;
+import Http from "./utils/httpUtil";
 
-const UpdateProfileService = {
-    token: AuthService.getToken(),
-    updateData: async (data) => {
-        try {
-            const headers = Headers(AuthService.getToken()).jsonHeader;
-            const res = await axios.post(`${API}/profile/update`, data, { headers });
-            if (!res.data.success)
-                return console.log(res.data.error.msg);
-            // console.log(res.data);
-            return res.data;
-        }
-        catch (err) {
-            console.log(Object.values(err)[2].data);
-            if (Object.values(err)[2].status === 400 || Object.values(err)[2].status === 500)
-                return Object.values(err)[2].data;
-        }
+const {Users, Headers, ImageUpload, jwtToken} = ConstService;
 
-    },
-    updateToken: async (data) => {
-        try {
-            const headers = Headers(AuthService.getToken()).jsonHeader;
-            const res = await axios.post(`${API}/users/update`, data, { headers });
-            if (!res.data.success)
-                return console.log(res.data.error.msg);
-            // console.log(res.data);
-            localStorage.setItem("jwt_token", res.data.token);
-            return true;
-        }
-        catch (err) {
-            console.log(Object.values(err)[2].data)
-            if (Object.values(err)[2].status === 400 || Object.values(err)[2].status === 500)
-                return Object.values(err)[2].data;
-        }
-    },
-    updatePhoto: async (photoData) => {
-        try {
-            const headers = Headers(AuthService.getToken()).fileHeader;
-            const res = await axios.post(`${API}/imageUpload`, photoData, { headers });
-            if (!res.data.success)
-                return console.log(res.data.error.msg);
+class UpdateProfileService {
+    constructor() {
+        this.http = new Http();
+    }
 
-            console.log(res.data.file.path);
-            return res.data.file.path;
-        }
-        catch (err) {
-            console.log(Object.values(err)[2].data)
-            if (Object.values(err)[2].status === 400 || Object.values(err)[2].status === 500)
-                return Object.values(err)[2].data;
-        }
-    },
-    updatePassword: async (pass) => {
-        try {
-            const headers = Headers(AuthService.getToken()).jsonHeader;
-            const res = await axios.post(`${API}/users/reset-pass`, pass, { headers })
-            if (!res.data.success)
-                return console.log(res.data.error.msg);
+    async updateData(data) {
+        const res = await this.http.request("post", Users.updateProfile,
+            {body: data, headers: Headers.jsonHeader});
+        if (res.code === 202)
+            return res.body;
+    }
 
-            console.log(res.data);
-            return res.data.msg;
-        } catch (err) {
-            console.log(Object.values(err)[2].data)
-            if (Object.values(err)[2].status === 400 || Object.values(err)[2].status === 500)
-                return Object.values(err)[2].data;
-        }
+    async updateToken(data) {
+        const res = await this.http.request("post", Users.updateToken,
+            {body: data, headers: Headers.jsonHeader});
+        localStorage.setItem(jwtToken, res.body.token);
+        return res.body;
+    }
+
+    async updatePhoto(photoData) {
+        const res = await this.http.request("post", ImageUpload._base,
+            {body: photoData, headers: Headers.fileHeader});
+        localStorage.setItem(jwtToken, res.body.token);
+        return res.body.file;
+    }
+
+    async updatePassword(pass) {
+        const res = await this.http.request("post", Users.resetPass,
+            {body: pass, headers: Headers.jsonHeader});
+        return res.body;
     }
 }
+
 export default UpdateProfileService;

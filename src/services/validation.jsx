@@ -1,4 +1,4 @@
-const ValidatinService = {
+const ValidationService = {
     fieldsValid: (name, value, formErrors) => {
         const emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/);
         switch (name) {
@@ -19,7 +19,7 @@ const ValidatinService = {
         }
         return formErrors;
     },
-    formValid: ({ formErrors, ...rest }) => {
+    formValid: ({formErrors, ...rest}) => {
         let valid = true;
         Object.values(formErrors).forEach(val => {
             val.length > 0 && (valid = false);
@@ -29,10 +29,10 @@ const ValidatinService = {
         });
         return valid;
     },
-    passValid : (password, confirm, formError) => {
-        return confirm.localeCompare(password) !== 0 ? 
-        formError.confirmPassword = "Passwords must be identical" : 
-        formError.confirmPassword = "";
+    passValid: (password, confirm, formError) => {
+        return confirm.localeCompare(password) !== 0 ?
+            formError.confirmPassword = "Passwords must be identical" :
+            formError.confirmPassword = "";
     }
 }
-export default ValidatinService;
+export default ValidationService;

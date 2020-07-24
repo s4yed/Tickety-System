@@ -37,7 +37,7 @@ class Register extends Component {
             password
         } = this.state;
         if (ValidationService.formValid(this.state))
-            AuthService.signup({ username, email, password }).then(status => {
+            AuthService.signUp({ username, email, password }).then(status => {
                 if (status) {
                     this.setState({
                         username: "",
