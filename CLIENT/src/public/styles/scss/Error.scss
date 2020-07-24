@@ -1,0 +1,48 @@
+@import "Home/Navbar";
+.row_err {
+  position: relative;
+  background-image: url("../../images/404.jpg");
+  background-position: center;
+  height: 100vh;
+  .err_overlay {
+    background:linear-gradient(to right,
+            #3b8696,
+            #5e9aab,
+            #78a6b4
+    );
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .9;
+  }
+  h1 {
+    position: absolute;
+    font-size: 8em;
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+    font-weight: bold;
+    left: 0;
+    right: 0;
+    h5 {
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: 2px;
+      font-family: "Roboto", sans-serif;
+    }
+    a {
+      color: #f2f2f2;
+      font-size: 20px;
+      font-weight: 300;
+      position: absolute;
+      left: 0;
+      right: 0;
+      &:hover{
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+  }
+}
+//#3b8696,#5e9aab,#78a6b4

@@ -1,0 +1,67 @@
+.ftco-domain {
+  background:linear-gradient(to left,
+          #3b8696,
+          #5e9aab,
+          #78a6b4
+  );
+  padding: 3em 0 !important;
+  width: 100%;
+}
+
+.domain-form .form-group input.name,
+.domain-form .form-group select.name {
+  border-radius: 50px;
+}
+.domain-form .form-group .form-control {
+  height: 70px !important;
+  width: 15em;
+  transition: width 500ms cubic-bezier(0, 0.71, 0.33, 1.26);
+  &:focus {
+    width: 30em;
+    box-shadow: none;
+  }
+}
+.domain-form {
+  box-shadow: 0px 10px 35px -10px #377282;
+  border-radius: 50px;
+}
+
+.form-control {
+  height: 65px !important;
+  background: #fff !important;
+  color: #000 !important;
+  border-radius: 50px;
+
+  border: 1px solid #ebebeb;
+  display: block;
+  padding: 0rem 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  &:focus {
+    border: 1px solid #fff !important;
+    outline: none;
+  }
+}
+
+.domain-form .form-group .btn-secondary {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  color: #535353;
+  font-size: 20px;
+  padding: 0 1em;
+  text-align: center;
+  background: #fff !important;
+  border: 1px solid #fff !important;
+  &:focus{
+    border: 1px solid #fff !important;
+    outline: none ;
+    box-shadow: none;
+  }
+  &:active {
+    box-shadow: none !important;
+  }
+
+}
+.form-group{
+    margin-bottom: 0;
+}

@@ -1,0 +1,44 @@
+//Custom Fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@import "./scss/Home/Home";
+::-moz-selection { /* Code for Firefox */
+  color: #fff;
+  background: #78a6b4;
+}
+
+::selection {
+  color: #fff;
+  background: #78a6b4;
+}
+.loading {
+  margin: 25% !important;
+  background-color: #78a6b4 !important;
+}
+
+.container{
+  width: 100%;
+  //min-height: 100vh;
+  position: relative;
+}
+
+@media (min-width: 992px){
+  .container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+  // background-image: url('../images/BG.jfif');
+  background-size: cover;
+  margin: auto;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+

@@ -1,0 +1,131 @@
+.main {
+    background-image: url('../../../images/claudio-schwarz-purzlbaum-UX-mCYFC1cA-unsplash.jpg');
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hero-wrap {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.hero-wrap .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    opacity: 0.5;
+    background: linear-gradient(to right, #3b8696, #5e9aab, #78a6b4);
+    background-size: 400%;
+    animation: bg-animation 10s infinite alternate;
+}
+@keyframes bg-animation {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+}
+
+.hero-wrap .slider-text {
+    height: 750px;
+    z-index: 0;
+    overflow: hidden;
+}
+@media (max-width: 991.98px) {
+    .hero-wrap .slider-text {
+        text-align: center;
+        height: 750px;
+    }
+}
+.hero-wrap .slider-text .subheading {
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 1em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.hero-wrap .slider-text .text {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: block;
+}
+.hero-wrap .slider-text h1 {
+    font-size: 55px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: 900;
+    font-family: 'Gotham';
+}
+.hero-wrap .slider-text h1 span {
+    display: block;
+    font-weight: 700;
+}
+@media (max-width: 991.98px) {
+    .hero-wrap .slider-text h1 {
+        font-size: 50px;
+    }
+}
+@media (max-width: 767.98px) {
+    .hero-wrap .slider-text h1 {
+        font-size: 40px;
+    }
+}
+.hero-wrap .slider-text p {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+}
+.hero-wrap .slider-text .btn-custom {
+    color: #fff;
+    background: #207dff;
+    padding: 10px 20px;
+}
+.hero-wrap.hero-wrap-2 {
+    height: 600px !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+@media (max-width: 1200px) {
+    .hero-wrap.hero-wrap-2 {
+        background-position: top center !important;
+    }
+}
+.hero-wrap.hero-wrap-2 .slider-text {
+    height: 600px !important;
+}
+@media (max-width: 990px) {
+    .hero-wrap.hero-wrap-2 .slider-text {
+        text-align: center;
+        height: 600px !important;
+    }
+}
+.btn-outline-light {
+    // background-color: #fff;
+    color: #fff;
+    padding: 0.5em;
+    width: 15em;
+    height: 60px;
+    border-radius: 50px;
+    border: 2px solid #f6f6f6;
+    margin-top: 2em;
+    &:hover {
+        background: #fafafa;
+        color: #5e9aab !important;
+        border: 2px solid #f6f6f6;
+        box-shadow: 0px 10px 35px -10px #377282;
+        border-radius: 50px;
+    }
+    &:focus {
+        border: 2px solid #f6f6f6;
+        outline: none;
+    }
+}

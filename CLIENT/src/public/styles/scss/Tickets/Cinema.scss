@@ -1,0 +1,41 @@
+@import "Ticket";
+.ticket {
+  overflow: hidden;
+  &__photo {
+    width: 100%;
+    color: #3b8696;
+    border-bottom: 1px solid #78a6b4;
+    background-image: url('movie.jpg');
+    background-size: cover;
+    padding-bottom: 12em;
+    overflow: hidden;
+  }
+  &__data {
+    width: 100%;
+    padding: 2em 2em 0 3em !important;
+    text-align: left;
+    margin: auto;
+    h5 {
+      padding-bottom: 1em;
+      color: #5e9aab;
+    }
+    .col-4 {
+      h1 {
+        text-align: center;
+        font-size: 3em;
+        color: #5e9aab;
+        font-family: "Roboto";
+        font-weight: 900;
+      }
+    }
+  }
+}
+
+
+
+@media only screen and (min-width: 1024px) {
+    .ticket {
+      width:99%;
+
+    }
+  }
