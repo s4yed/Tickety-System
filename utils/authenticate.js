@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const { User } = require('../models/index');
+const {User} = require('../models/index');
 const jwt = require('jsonwebtoken');
 
 // Use localStrategy to authenticate users
@@ -12,7 +12,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // Sign JWT token valid for just 50 minutes
 const getToken = user => {
-    return jwt.sign({ user }, '0132-4567-8901-2345-6789', {
+    return jwt.sign({user}, '0132-4567-8901-2345-6789', {
         // expiresIn: '50m',
     });
 };
@@ -20,11 +20,11 @@ const getToken = user => {
 // JWT Strategy options to extract JWT toke from request headers
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = '0132-4567-8901-2345-6789';
+opts.secretOrKey = process.env.TOKEN_SECRET;
 
 const jwtPassport = passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {
-        User.findOne({ _id: jwt_payload.user._id }, (err, user) => {
+        User.findOne({_id: jwt_payload.user._id}, (err, user) => {
             if (err) return done(err, false);
             if (user) return done(null, user);
             return done(null, false);
@@ -34,7 +34,7 @@ const jwtPassport = passport.use(
 const verifyAdmin = (req, res, next) => {
     if (!req.user.admin) {
         res.statusCode(403);
-        err = new Error('You are not authorized to perform this operation!');
+        const err = new Error('You are not authorized to perform this operation!');
         return next(err);
     } else {
         res.statusCode(200);
@@ -42,8 +42,10 @@ const verifyAdmin = (req, res, next) => {
     }
 };
 
-exports.local = local;
-exports.getToken = getToken;
-exports.jwtPassport = jwtPassport;
-exports.verifyAdmin = verifyAdmin;
-exports.verifyUser = passport.authenticate('jwt', { session: false });
+module.exports = {
+    local,
+    getToken,
+    jwtPassport,
+    verifyAdmin,
+    verifyUser: passport.authenticate('jwt', {session: false})
+};

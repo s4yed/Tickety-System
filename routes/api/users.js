@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { verifyAdmin, verifyUser } = require('../../utils/authenticate');
-const userController = require('../../controllers/user.controller')
+const { verifyUser } = require('../../utils/authenticate');
+const userController = require('../../controllers/user.controller');
 
 router.route('/user_data').get(verifyUser, userController.getUserData);
 

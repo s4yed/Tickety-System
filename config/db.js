@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const db = mongoose.connection;
-const { User, Ticket } = require('../models/index');
-const { matches, buses, trains } = require('../utils/seeders');
+const {User, Ticket} = require('../models/index');
+const {matches, buses, trains} = require('../utils/seeders');
 
-const connectDB = async () => {
+module.exports = async () => {
     mongoose
         .connect(
             'mongodb://localhost:27017/dbServer',
@@ -33,7 +33,7 @@ const connectDB = async () => {
                 password
             ),
             User.register(
-                new User({ username: 'youssef', email: 'youssef@tickety.com' }),
+                new User({username: 'youssef', email: 'youssef@tickety.com'}),
                 password
             ),
         ]).then(() => console.log('Added users!'));
@@ -56,5 +56,3 @@ const connectDB = async () => {
         Promise.all(all_trains).then(() => console.log('Added train tickets!'));
     });
 };
-
-module.exports = connectDB;

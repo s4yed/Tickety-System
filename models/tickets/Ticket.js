@@ -12,10 +12,12 @@ const TicketSchema = new Schema({
         type: String,
         required: true,
         uppercase: true,
+        text: true
     },
     stadium: {
         type: String,
         default: null,
+        text: true
     },
     bus_no: {
         type: Number,
@@ -28,34 +30,42 @@ const TicketSchema = new Schema({
     from: {
         type: String,
         default: null,
+        text: true
     },
     to: {
         type: String,
         default: null,
+        text: true
     },
     cinema_name: {
         type: String,
         default: null,
+        text: true
     },
     movie_name: {
         type: String,
         default: null,
+        text: true
     },
     address: {
         type: String,
         default: null,
+        text: true
     },
     home_team: {
         type: String,
         default: null,
+        text: true
     },
     away_team: {
         type: String,
         default: null,
+        text: true
     },
     date_time: {
         type: String,
         required: true,
+        text: true
     },
     price: {
         type: Currency,
@@ -65,6 +75,7 @@ const TicketSchema = new Schema({
     ticket_type: {
         type: String,
         required: true,
+        text: true
     },
     ticket_no: {
         type: Number,

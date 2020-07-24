@@ -1,4 +1,4 @@
-const { Ticket } = require('../../models/index');
+const { Ticket } = require('../models/index');
 module.exports = {
     getAllTickets: async (req, res, next) => {
         try {
@@ -26,7 +26,7 @@ module.exports = {
     },
     getTrainTickets: async (req, res, next) => {
         try {
-            const trains = await Ticket.find({ category: 'TRAIN' })
+            const trains = await Ticket.find({ category: 'TRAIN' });
             return res.status(200).json({ success: true, trains });
         } catch (err) {
             return res.status(500).json({ success: false, error: err });
@@ -34,7 +34,7 @@ module.exports = {
     },
     getCinemaTickets: async (req, res, next) => {
         try {
-            const cinemas = await Ticket.find({ category: 'CINEMA' })
+            const cinemas = await Ticket.find({ category: 'CINEMA' });
             return res.status(200).json({ success: true, cinemas });
         } catch (err) {
             return res.status(500).json({ success: false, error: err });
@@ -42,7 +42,7 @@ module.exports = {
     },
     getMatchTickets: async (req, res, next) => {
         try {
-            const matches = await Ticket.find({ category: 'MATCH' })
+            const matches = await Ticket.find({ category: 'MATCH' });
             return res.status(200).json({ success: true, matches });
         } catch (err) {
             return res.status(500).json({ success: false, error: err });
@@ -50,7 +50,7 @@ module.exports = {
     },
     getTicketById: async (req, res, next) => {
         try {
-            const ticket = await Ticket.findById({ _id: req.params.id })
+            const ticket = await Ticket.findById({ _id: req.params.id });
             return res.status(200).json({ success: true, ticket });
         } catch (err) {
             return res.status(500).json({ success: false, error: err });

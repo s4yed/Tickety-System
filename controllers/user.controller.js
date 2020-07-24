@@ -1,9 +1,9 @@
-const { User, Ticket } = require('../../models/index');
+const { User, Ticket } = require('../models/index');
 const { getToken } = require('../utils/authenticate')
 module.exports = {
     getUserData: async (req, res, next) => {
         try {
-            const user = await User.findById({ _id: req.user._id });
+            const user = await User.findById({ _id: req.user._id }).lean();
             if (user) res.status(200).json({ success: true, user });
             else res.status(404).json({ success: false, msg: 'User doesn\'t exist.' });
             
@@ -54,7 +54,7 @@ module.exports = {
     },
     isAdminUser: async (req, res, next) => {
         try {
-            const user = await User.findById({ _id: req.user._id });
+            const user = await User.findById({ _id: req.user._id }).lean();
             if (user) res.status(200).json({ success: true, admin: user.admin });
             else res.status(404).json({ success: false, msg: 'User doesn\'t exist.' });
         } catch (err) {

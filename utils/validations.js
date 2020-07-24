@@ -1,6 +1,6 @@
 const Joi = require('@hapi/joi');
 
-const registerValidation = data => {
+const registerValidation = (req, res, next) => {
     const schema = Joi.object().keys({
         username: Joi.string()
             .min(4)
@@ -12,7 +12,12 @@ const registerValidation = data => {
             .min(6)
             .required(),
     });
-    return schema.validate(data);
+    const { error } = schema.validate(req.body);
+    if (error)
+        return res
+            .status(400)
+            .json({ success: false, error: error.details[0].message });
+    return next();
 };
 
 const loginValidation = (req, res, next) => {
@@ -29,7 +34,7 @@ const loginValidation = (req, res, next) => {
         return res
             .status(400)
             .json({ success: false, error: error.details[0].message });
-    next();
+    return next();
 };
 
 exports.registerValidation = registerValidation;

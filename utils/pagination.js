@@ -31,11 +31,12 @@ const paginatedResults = Model => {
             resutls.tickets = await Model.find() // Find all model results exists in database
                 .limit(limit) // Limit returned results
                 .skip(start) // Skip from start index every time send the request
+                .lean()
                 .exec();
             res.paginatedResults = resutls;
-            next();
+            return next();
         } catch (error) {
-            res.status(500).json({ success: false, error });
+            return res.status(500).json({ success: false, error });
         }
     };
 };
