@@ -36,7 +36,7 @@
   "devDependencies": {
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
-    "nodemon": "^1.19.3",
+    "nodemon": "^2.0.4",
     "request": "^2.88.2"
   }
 }
