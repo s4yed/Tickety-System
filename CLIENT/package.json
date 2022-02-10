@@ -8,7 +8,7 @@
     "buffer": "^5.4.3",
     "consola": "^2.14.0",
     "mdbootstrap": "^4.8.11",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-datetime": "^2.16.3",
